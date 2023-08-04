@@ -6,7 +6,7 @@ const { userRouter } = require('./Routes/User.Routes');
 const QuestionRouter = require('./Routes/Question.Routes');
 const auth = require('./Middleware/Auth');
 const AdminRouter = require('./Routes/Admin.Routes');
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 const app = express()
 app.use(express.json())
 app.use(cors())
