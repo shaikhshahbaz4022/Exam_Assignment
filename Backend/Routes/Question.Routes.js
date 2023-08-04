@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper, allexamdata } = require('../Controller/Question.Controller');
+const { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper, allexamdata, scoreGenerate } = require('../Controller/Question.Controller');
 
 const { UserAuthenticate } = require('../Middleware/RBAC');
 const ExamModel = require('../Model/Question.Model');
@@ -33,5 +33,5 @@ QuestionRouter.get("/seepaper/:id", allpapers)
 //instructor can check the papers
 QuestionRouter.patch("/checkpaper/:examID", checkpaper)
 
-
+QuestionRouter.get("/countscore/:examID", scoreGenerate)
 module.exports = QuestionRouter 

@@ -49,7 +49,7 @@ export default function Login() {
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
-            to enjoy all of our cool <span color={"blue.400"}>features</span> ✌️
+            Login For Examination Panel<span color={"blue.400"}>features</span>
           </Text>
         </Stack>
         <Box
