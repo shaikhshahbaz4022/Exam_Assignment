@@ -37,7 +37,8 @@ const allexamdata = async (req, res) => {
 
 const userQuestion = async (req, res) => { // for user 1.point
     try {
-        const UserExam = await ExamModel.find({ assignedTo: req.userID }).populate("assignedTo").populate("instructor")
+        const UserExam = await ExamModel.find({ assignedTo: req.userID, status: "upcoming" }).populate("assignedTo").populate("instructor")
+
         res.status(201).json(UserExam)
 
     } catch (error) {
@@ -61,6 +62,7 @@ const recent = async (req, res) => {
     try {
         const userId = req.userID;
         const user = await UserModel.findById(userId).populate('clearedExams');
+        console.log(user)
         res.status(200).json(user.clearedExams);
     } catch (error) {
         res.status(500).json({ msg: error.message });
@@ -104,7 +106,7 @@ const submit = async (req, res) => {
             return res.status(404).json({ msg: 'User or Exam not found' });
         }
 
-        // Update the answers for each question in the exam using a for loop
+
         for (let i = 0; i < exam.questions.length; i++) {
             exam.questions[i].answer = answer[i];
         }
