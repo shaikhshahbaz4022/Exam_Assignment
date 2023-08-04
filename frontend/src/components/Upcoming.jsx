@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

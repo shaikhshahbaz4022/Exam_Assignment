@@ -11,10 +11,17 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_URL}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }, []);
   const fetchLogin = () => {
     fetch(`${process.env.REACT_APP_URL}/user/login`, {
       method: "POST",

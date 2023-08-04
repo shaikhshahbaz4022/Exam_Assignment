@@ -195,7 +195,7 @@ const scoreGenerate = async (req, res) => {
         res.status(200).json({ count, totalQuestions: exam.questions.length })
 
     } catch (error) {
-
+        res.status(500).json({ msg: error.message });
     }
 }
 module.exports = { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper, allexamdata, scoreGenerate }
