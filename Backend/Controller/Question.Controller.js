@@ -159,19 +159,43 @@ const allpapers = async (req, res) => {
     }
 }
 
-
 const checkpaper = async (req, res) => {
     try {
-        const { payload } = req.body
-        const { index } = req.query // question array
-        const { examID } = req.params
-        const exam = await ExamModel.findById(examID)
-        exam.questions[index].isRight = payload
-        await exam.save()
-        res.status(200).json({ msg: "Checked Paper Succesfully" })
+        const { payload } = req.body;
+        const { index } = req.query;
+        const { examID } = req.params;
+        const exam = await ExamModel.findById(examID);
 
+
+        if (!exam || !exam.questions[index]) {
+            return res.status(404).json({ msg: "Exam or Question not found" });
+        }
+
+
+        exam.questions[index].isRight = payload;
+        await exam.save();
+
+        res.status(200).json({ msg: "Checked Paper Successfully" });
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
+};
+
+const scoreGenerate = async (req, res) => {
+    try {
+        const { examID } = req.params
+        const exam = await ExamModel.findById({ _id: examID })
+        let count = 0;
+        exam.questions.map((ele, i) => {
+            if (ele.isRight) {
+                count++
+            }
+        })
+
+        res.status(200).json({ count, totalQuestions: exam.questions.length })
+
+    } catch (error) {
+
+    }
 }
-module.exports = { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper, allexamdata }
+module.exports = { CreateExam, userQuestion, AllUsers, recent, upcoming, submit, assigned, allpapers, checkpaper, allexamdata, scoreGenerate }
